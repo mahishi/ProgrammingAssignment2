@@ -1,6 +1,9 @@
-## makeCacheMatrix function will make a special matrix object that will cache its inverse. Two global variables are used. x and m. x is the matric and m is the inverse matrix. Bith these variables are in the parent environments.
+## makeCacheMatrix function will make a special matrix object that will cache its inverse. 
+## Two variables are used. x and m. x is the matric and m is the inverse matrix. 
+## Both these variables are in the enclosing environments.
 ## This function has 4 functions in it: set, get, setMatrixInverse and getMatrixInverse
-## set function: Takes a matrix as the argument. x is set to the input matrix. m, the inverse of the matrix is set to NULL. (x and m are in parent environments)
+## set function: Takes a matrix as the argument. 
+## x is set to the input matrix. m, the inverse of the matrix is set to NULL. (x and m are in enclosing environments)
 ## get function: This simply gets the matrix that was set using set function. Nothing else.
 ## setMatrixInverse: This function take inverse of a matrix as an argument and sets m to the given inverse matrix.
 ## getmatrixInverse: This function just returns the inverse of the matric that is stored by setMatrixInverse function
@@ -17,10 +20,12 @@ makeCacheMatrix <- function(x = matrix()) {
              setMatrixInverse = setMatrixInverse,
              getMatrixInverse = getMatrixInverse)
 }
-## cacheSolve fuction is the function that takes makeCacheMatrix as input and returns the inverse of the martix that is stored by makeCacheMatrix function.
-## While returning the inverse of the matrix, it checks if the inverse is already calculated and the inverse is stored in its environment.
-## If the inverse if null, it calculates the inverse, stores the newly calculated inverse globally using makeCacheMatrix$setMatricInverse function and returns the inverse of the matrix.
-## If the inverse is not null, then it simply returns the inverse of the matrix that is already in the global environment.
+## cacheSolve fuction is the function that takes makeCacheMatrix as input
+## returns the inverse of the martix that is stored by makeCacheMatrix function.
+## While returning the inverse of the matrix, it checks if the inverse is already calculated and inverse is stored in enclosing environment.
+## If the inverse if null, it calculates the inverse using solve() function, 
+## stores the newly calculated inverse globally using makeCacheMatrix$setMatricInverse function and returns the inverse of the matrix.
+## If the inverse is not null, then it simply returns the inverse of the matrix that is already in the enclosing environment.
 cacheSolve <- function(x, ...) {
         m <- x$getMatrixInverse()
         if(!is.null(m)) {
